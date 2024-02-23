@@ -143,6 +143,7 @@ export interface LightningElementConstructor {
     stylesheets: TemplateStylesheetFactories;
 }
 
+
 type HTMLElementTheGoodParts = { toString: () => string } & Pick<
     HTMLElement,
     | 'accessKey'
@@ -770,6 +771,11 @@ LightningElement.prototype = {
     get tagName() {
         const { elm, renderer } = getAssociatedVM(this);
         return renderer.getTagName(elm);
+    },
+
+    get hostStyle() {
+        const { elm } = getAssociatedVM(this);
+        return elm.style;
     },
 
     render(): Template {
